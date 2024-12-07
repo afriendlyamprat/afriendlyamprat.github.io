@@ -103,6 +103,7 @@ function rewriteTemplate(type) {
 		document.title = "Creating "+(type=="pikmin"?"Pikmin":type)+" article "+parameters.pageName+"..."
 
 		document.getElementById("createArticleLink").href = `https://pikminfanon.com/w/index.php?action=edit&title=${parameters.pageName}&create=Create+an+article`
+		document.getElementById("createArticleLink").title = `https://pikminfanon.com/w/index.php?action=edit&title=${parameters.pageName}&create=Create+an+article`
 	}
 }
 
