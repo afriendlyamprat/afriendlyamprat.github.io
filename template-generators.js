@@ -16,7 +16,22 @@ parameters = {
 	doCreatureNotes: null,
 	doNavboxesFooter: null,
 	enemyCategories: [],
-	
+	doPlotSection: null,
+	doOverviewSection: null,
+	doCutscenesSection: null,
+	doContentsSection: null,
+	doDataFilesSection: null,
+	doGallerySection: null,
+	navboxName: null,
+	caves: null,
+	keySections: null,
+	pikminDiscovered: null,
+	doHowToReachSection: null,
+	caveArea: null,
+	levelTerm: null,
+	sublevelNum: null,
+	sublevelImages: null,
+	sublevelMusic: null,
 	isPlayable: null,
 	isDLC: null,
 }
@@ -39,6 +54,9 @@ function updateParams(type) {
 		}
 		if(type == 'game') {
 			parameters.doNavboxesFooter = true
+		}
+		if(type == 'area') {
+			
 		}
 	}
 	// Individual article type parameters from user input
@@ -89,6 +107,62 @@ function updateParams(type) {
 		parameters.additionalParams = parseInt(document.getElementById("additionalParams").value.trim())
 	}
 	
+	if (type == 'area') {
+		parameters.pageName = document.getElementById("pageName").value.trim()
+		parameters.fanonProjectName = document.getElementById("fanonProjectName").value.trim()
+		parameters.author = document.getElementById("author").value.trim()
+		parameters.customFanonGameBanner = document.getElementById("customFanonGameBanner").value.trim()
+		parameters.doPlotSection = (document.getElementById("doPlotSection").value == "true")
+		parameters.doOverviewSection = (document.getElementById("doOverviewSection").value == "true")
+		parameters.doCutscenesSection = (document.getElementById("doCutscenesSection").value == "true")
+		parameters.doContentsSection = (document.getElementById("doContentsSection").value == "true")
+		parameters.doDataFilesSection = (document.getElementById("doDataFilesSection").value == "true")
+		parameters.doGallerySection = (document.getElementById("doGallerySection").value == "true")
+		parameters.navboxName = document.getElementById("navboxName").value.trim()
+		parameters.additionalParams = parseInt(document.getElementById("additionalParams").value.trim())
+		parameters.caves = []
+		let cave1 = document.getElementById("cave1").value.trim()
+		let cave2 = document.getElementById("cave2").value.trim()
+		let cave3 = document.getElementById("cave3").value.trim()
+		let cave4 = document.getElementById("cave4").value.trim()
+		if (cave1) parameters.caves.push(cave1)
+		if (cave2) parameters.caves.push(cave2)
+		if (cave3) parameters.caves.push(cave3)
+		if (cave4) parameters.caves.push(cave4)
+		parameters.keySections = []
+		let ks1 = document.getElementById("ks1").value.trim()
+		let ks2 = document.getElementById("ks2").value.trim()
+		let ks3 = document.getElementById("ks3").value.trim()
+		let ks4 = document.getElementById("ks4").value.trim()
+		if (ks1) parameters.keySections.push(ks1)
+		if (ks2) parameters.keySections.push(ks2)
+		if (ks3) parameters.keySections.push(ks3)
+		if (ks4) parameters.keySections.push(ks4)
+		parameters.pikminDiscovered = []
+		let pik1 = document.getElementById("pik1").value.trim()
+		let pik2 = document.getElementById("pik2").value.trim()
+		let pik3 = document.getElementById("pik3").value.trim()
+		let pik4 = document.getElementById("pik4").value.trim()
+		if (pik1) parameters.pikminDiscovered.push(pik1)
+		if (pik2) parameters.pikminDiscovered.push(pik2)
+		if (pik3) parameters.pikminDiscovered.push(pik3)
+		if (pik4) parameters.pikminDiscovered.push(pik4)		
+	}
+
+	if (type == 'cave') {
+		parameters.pageName = document.getElementById("pageName").value.trim()
+		parameters.fanonProjectName = document.getElementById("fanonProjectName").value.trim()
+		parameters.author = document.getElementById("author").value.trim()
+		parameters.customFanonGameBanner = document.getElementById("customFanonGameBanner").value.trim()
+		parameters.doHowToReachSection = (document.getElementById("doHowToReachSection").value == "true")
+		parameters.navboxName = document.getElementById("navboxName").value.trim()
+		parameters.additionalParams = parseInt(document.getElementById("additionalParams").value.trim())
+		parameters.caveArea = document.getElementById("caveArea").value.trim()
+		parameters.levelTerm = document.getElementById("levelTerm").value.trim()
+		parameters.sublevelNum = parseInt(document.getElementById("sublevelNum").value.trim())
+		parameters.sublevelImages = (document.getElementById("sublevelImages").value == "true")
+		parameters.sublevelMusic = (document.getElementById("sublevelMusic").value == "true")
+	}
 	
 }
 
@@ -125,6 +199,12 @@ function getArticleTemplate(type) {
 		}
 		if (type == "game") {
 			return getGameArticleTemplate()
+		}
+		if (type == "area") {
+			return getAreaArticleTemplate()
+		}
+		if (type == "cave") {
+			return getCaveArticleTemplate()
 		}
 		throw new Error("No defined template for \""+type+"\" article")
 	}
@@ -543,10 +623,244 @@ ${navboxesFooter}
 	return template	
 }
 
+function getAreaArticleTemplate() {
+	let areaName = getDisplayParam("pageName")
+	let author = getDisplayParam("author")
+	let gameName = getDisplayParam("fanonProjectName")
+	let projectBanner = (parameters.customFanonGameBanner ? parameters.customFanonGameBanner : `media|${gameName}|${author}`)
+	let additionalParams = parameters.additionalParams
+	
+	var pikminDiscovered = ""
+	for (const pikmin of parameters.pikminDiscovered) {
+	  pikminDiscovered += `[[${pikmin}]], `
+	}
+	pikminDiscovered = pikminDiscovered.slice(0,-2)
+		
+	// Create infobox
+	var infobox = ``
+	
+	if(additionalParams == 0) infobox = `{{infobox area
+|pikmin=${pikminDiscovered}
+|caves=${parameters.caves.length}
+|treasures=
+}}`	
+	else if(additionalParams == 1) infobox = `{{infobox area
+|customname=${areaName}
+|pikmin=${pikminDiscovered}
+|caves=${parameters.caves.length}
+|treasures=
+|collectibles=
+}}`	
+	else if(additionalParams == 2) infobox = `{{infobox area
+|customname=${areaName}
+|image=
+|size=
+|location=
+|pikmin=${pikminDiscovered}
+|caves=${parameters.caves.length}
+|parts=
+|treasures=
+|fruits=
+|collectibles=
+|hazards=
+|obstacles=
+}}`	
+	else infobox = `{{infobox area
+|customname=${areaName}
+|image=
+|size=
+|caption=
+|location=
+|pikmin=${pikminDiscovered}
+|caves=${parameters.caves.length}
+|parts=
+|treasures=
+|fruits=
+|collectibles=
+|hazards=
+|obstacles=
+|music=
+|nocat=
+}}`
+	
+	
+	
+	let plotSection = parameters.doPlotSection ? `==Plot==\n...\n\n` : ``
+	let overviewSection = parameters.doOverviewSection ? `==Overview==\n...\n\n` : ``
+	let keySectionsSection = parameters.keySections.length ? `==Key sections==\n` : ``
+	if (parameters.keySections.length) {
+		for (const section of parameters.keySections) {
+		  keySectionsSection += `;${section}\n...\n`
+		}
+		keySectionsSection += "\n"
+	}
+	let cavesSection = parameters.caves.length ? `==Caves==\n` : ``
+	if (parameters.caves.length) {
+		for (const cave of parameters.caves) {
+		  cavesSection += `*[[${cave}]]\n`
+		}
+		cavesSection += "\n"
+	}
+	let cutscenesSection = parameters.doCutscenesSection ? `==Cutscenes==
+{| class="wikitable"
+! Cutscene || Image || Trigger || Description
+|-
+! <name>
+| [[File:|px]]
+| <trigger>
+| <description>
+|}
 
+` : ``
 
+	let contentsSection = parameters.doContentsSection ? `==Contents==
+===Enemies===
+{{columns|2|
+*
+}}
 
+` : ``
+	
+	
+	
+	
+	let dataFilesSection = parameters.doDataFilesSection ? `==Data files==\n{{main|Data file}}\n...\n\n` : ``
+	let gallerySection = parameters.doGallerySection ? `==Gallery==
+<gallery>
 
+</gallery>
+
+` : ``
+	
+	let navboxesFooter = parameters.navboxName ? `{{navboxes|
+{{${parameters.navboxName}}}
+}}
+` : ""
+	
+	// Generate template
+	let template = `
+{{${projectBanner}}}
+${infobox}
+
+'''''${areaName}''''' is an area in [[${gameName}]] ...\n
+${plotSection}${overviewSection}${keySectionsSection}${cavesSection}${cutscenesSection}${contentsSection}${dataFilesSection}${gallerySection}${navboxesFooter}
+`
+	
+	/* TODO potential additions:
+	
+	- Support for sublocations section instaed of just caves section (towers, dungeons, etc)
+	
+	*/
+	template = ASCIItoHTML(template.trim())
+	return template	
+}
+
+function getCaveArticleTemplate() {
+	let caveName = getDisplayParam("pageName")
+	let author = getDisplayParam("author")
+	let gameName = getDisplayParam("fanonProjectName")
+	let projectBanner = (parameters.customFanonGameBanner ? parameters.customFanonGameBanner : `media|${gameName}|${author}`)
+	let additionalParams = parameters.additionalParams
+	let caveArea = parameters.caveArea
+	
+	let sublevelNum = parameters.sublevelNum
+	if (isNaN(sublevelNum)) sublevelNum = 1
+	if (sublevelNum > 255) sublevelNum = 255
+	
+	// Create infobox
+	var infobox = ``
+	
+	if(additionalParams == 0) infobox = `{{infobox cave
+|location=[[${caveArea}]]
+|sublevels=${sublevelNum}
+|treasures=
+|hazards=
+}}`
+	else if(additionalParams == 1) infobox = `{{infobox cave
+|customname=${caveName}
+|location=[[${caveArea}]]
+|sublevels=${sublevelNum}
+|treasures=
+|collectibles=
+|hazards=
+}}`
+	else if(additionalParams == 2) infobox = `{{infobox cave
+|customname=${caveName}
+|image=
+|size=
+|caption=
+|location=[[${caveArea}]]
+|sublevels=${sublevelNum}
+|parts=
+|treasures=
+|fruits=
+|collectibles=
+|hazards=
+|obstacles=
+}}`
+	else infobox = `{{infobox cave
+|customname=${caveName}
+|image=
+|size=
+|caption=
+|location=[[${caveArea}]]
+|sublevels=${sublevelNum}
+|parts=
+|treasures=
+|fruits=
+|collectibles=
+|hazards=
+|obstacles=
+|nocat=
+}}`
+	
+	let howToReachSection = parameters.doHowToReachSection ? `==How to reach==\n...\n\n` : ``
+
+	let levelTerm = parameters.levelTerm
+	let sublevelImages = parameters.sublevelImages
+	let sublevelMusic = parameters.sublevelMusic
+	var sublevelSections = ""
+	for (let i = 1; i <= sublevelNum; i++) {
+		sublevelSections += `==${levelTerm} ${i}==${sublevelImages ? "\n[[File:Cave.png|thumb|200px|Sublevel "+i+" of "+caveName+".]]" : ""}
+		*'''Theme''':${sublevelMusic ? "\n*'''Music''':" : ""}
+*'''Treasures''':
+**
+*'''Enemies''':
+**
+*'''Obstacles''':
+**None
+*'''Vegetation''':
+**None
+*'''Others''':
+**None
+
+Sublevel ${i} of ${caveName} ...
+
+`
+	}
+	
+	let navboxesFooter = parameters.navboxName ? `{{navboxes|
+{{${parameters.navboxName}}}
+}}
+` : ""
+	
+	// Generate template
+	let template = `
+{{${projectBanner}}}
+${infobox}
+
+'''''${caveName}''''' is a cave in [[${gameName}]] ...\n
+${howToReachSection}${sublevelSections}${navboxesFooter}
+`
+	
+	/* TODO potential additions:
+	
+	- Checklist of hazards in the cave, similar to the one for enemy articles
+	
+	*/
+	template = ASCIItoHTML(template.trim())
+	return template	
+}
 
 
 

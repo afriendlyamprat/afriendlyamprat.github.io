@@ -58,9 +58,56 @@
 								<div id="siteSub">From Pikmin Fanon</div>
 														</div>
 															<div id="content" role="article" class="ve-init-mw-desktopArticleTarget-targetContainer">
-		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><p>
-		<i>(Under construction...)</i>
-		</p></div></div>
+		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output">
+		
+		<p>This Pikmin Fanon template generator creates the structure of a <b>fanon area article</b>. The parameters of the generator used apply the guidelines for area articles that are described in <a href="https://pikminfanon.com/wiki/PikminFanon:Area_article_guidelines" title="PikminFanon:Area article guidelines">PikminFanon:Area article guidelines</a>. For more information on these guidelines, please read the aforementioned Pikmin Fanon article.</p>
+		<p>Be aware of the fact that this template generator does not support all features that you may want to include in an area page. It is designed only as a starting point, and you will likely want to make changes and additions to your page before publishing it.</p>
+		<h1>Parameters</h1>
+		<p><i>Modifiable parameters that change the settings used by the template generator. Hover over a parameter for more information.</i></p>
+				
+		<div class="paramLine" title="The name of the area you are creating&#013;(please use title case)">Area name: <input type="text" id="pageName" name="pageName" size=30> </div>
+
+		<div class="paramLine" title='The name of the game this area is in'>Game name: <input type="text" id="fanonProjectName" name="fanonProjectName" size=30> </div>
+		
+		<div class="paramLine" title="The name of this game's / area's creator&#013;(use your Pikmin Fanon username if unsure)">Author name: <input type="text" id="author" name="author"  size=20> </div> <!--value="A Friendly Amprat"-->
+		
+		<div class="paramLine" title='If you have a custom banner template for your game, enter its name here&#013;(e.g. "PWW" if you&#39;re making a Pikmin for Pikmin: Wide World)'>Custom banner (advanced): <input type="text" id="customFanonGameBanner" name="customFanonGameBanner" size=15> </div>
+
+		<div class="paramLine" title="Display more or less infrequently used infobox parameters">Infobox detail: <select name="additionalParams" id="additionalParams"><option value="0">Less</option><option value="1" selected>Normal</option><option value="2">More</option><option value="3">All</option></select> </div>
+
+		<div class="paramLine" title="Select Yes to include a blank plot section.">Include plot section: <select name="doPlotSection" id="doPlotSection"><option value="true">Yes</option><option value="false" selected>No</option></select> </div>
+		
+		<div class="paramLine" title="Select Yes to include a blank overview section.">Include overview section: <select name="doOverviewSection" id="doOverviewSection"><option value="true" selected>Yes</option><option value="false">No</option></select> </div>
+						
+		<div class="paramLine" title="Select Yes to include a blank cutscenes section.">Include cutscenes section: <select name="doCutscenesSection" id="doCutscenesSection"><option value="true">Yes</option><option value="false" selected>No</option></select> </div>
+		
+		<div class="paramLine" title="Select Yes to include a blank contents section.&#013;By default the contents section includes an empty Enemies subsection.&#013;Feel free to edit and copy this subsection as desired.">Include contents section: <select name="doContentsSection" id="doContentsSection"><option value="true" selected>Yes</option><option value="false">No</option></select> </div>
+		
+		<div class="paramLine" title="Select Yes to include a blank data files section.">Include data files section: <select name="doDataFilesSection" id="doDataFilesSection"><option value="true">Yes</option><option value="false" selected>No</option></select> </div>
+		
+		<div class="paramLine" title="Select Yes to include a blank gallery section.">Include gallery section: <select name="doGallerySection" id="doGallerySection"><option value="true">Yes</option><option value="false" selected>No</option></select> </div>
+
+		<div class="paramLine" title="Enter up to 4 key sections in this area. Each will become a section heading with an empty description to fill. Leave all blank to exclude the key sections section.">Key sections: <input type="text" id="ks1" name="ks1" size=20> <input type="text" id="ks2" name="ks2" size=20> <input type="text" id="ks3" name="ks3" size=20> <input type="text" id="ks4" name="ks4" size=20> </div>
+		
+		<div class="paramLine" title="Enter up to 4 Pikmin types discovered in this area or in its caves. Their articles will automatically be linked in the area infobox.">Pikmin discovered: <input type="text" id="pik1" name="pik1" size=20> <input type="text" id="pik2" name="pik2" size=20> <input type="text" id="pik3" name="pik3" size=20> <input type="text" id="pik4" name="pik4" size=20> </div>
+		
+		<div class="paramLine" title="Enter up to 4 names of caves in this area. Their articles will automatically be linked in the Caves section. Leave all blank to exclude the caves section.">Area caves: <input type="text" id="cave1" name="cave1" size=20> <input type="text" id="cave2" name="cave2" size=20> <input type="text" id="cave3" name="cave3" size=20> <input type="text" id="cave4" name="cave4" size=20> </div>
+
+		<div class="paramLine" title='If the game this area belongs to has a custom navigation template, enter its name here&#013;(e.g. "PWWnav" if you&#39;re making an area for Pikmin: Wide World)'>Game navigation template (advanced): <input type="text" id="navboxName" name="navboxName" size=15> </div>
+		
+		<h1>Template output</h1>
+		<div>
+			<button id="rewriteTemplate" onclick="rewriteTemplate('area')" type="button">Update generated template</button>
+		</div>
+		<div>
+			<code id="articleSourceCode" class="articleSourceCode">
+				
+			</code>
+		</div>
+		<p><i>To test how this article looks on Pikmin Fanon, make a source edit to <a href="https://pikminfanon.com/wiki/PikminFanon:Sandbox" title="PikminFanon:Sandbox">Pikmin Fanon's sandbox page</a> and show the preview or save changes.</p>
+		<p>If you're happy with how it looks, go ahead and <a id="createArticleLink" href="https://pikminfanon.com/wiki/Template:Create_an_article" title="Template:Create_an_article">create your page on Pikmin Fanon</a>!</i></p>
+		
+		</div></div>
 	</div>
 	</div>
 	</div>
