@@ -742,7 +742,7 @@ function getAreaArticleTemplate() {
 {{${projectBanner}}}
 ${infobox}
 
-'''''${areaName}''''' is an area in [[${gameName}]] ...\n
+'''${areaName}''' is an area in [[${gameName}]] ...\n
 ${plotSection}${overviewSection}${keySectionsSection}${cavesSection}${cutscenesSection}${contentsSection}${dataFilesSection}${gallerySection}${navboxesFooter}
 `
 	
@@ -849,7 +849,7 @@ Sublevel ${i} of ${caveName} ...
 {{${projectBanner}}}
 ${infobox}
 
-'''''${caveName}''''' is a cave in [[${gameName}]] ...\n
+'''${caveName}''' is a cave in [[${gameName}]] ...\n
 ${howToReachSection}${sublevelSections}${navboxesFooter}
 `
 	
