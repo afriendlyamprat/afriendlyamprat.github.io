@@ -18,5 +18,8 @@ document.getElementById("sidebar").innerHTML = `<div id="site-navigation-sidebar
 							<span class="sidebar-heading">Misc. tools</span>
 							<ul>
 								<li class="sidebar-link mw-list-item"><a href="category_overlap.html" class="sidebar-item">Category overlap finder</a></li>
+								<li class="sidebar-link mw-list-item"><a href="category_combination.html" class="sidebar-item">Category combination finder</a></li>
+								<li class="sidebar-link mw-list-item"><a href="category_exclusion.html" class="sidebar-item">Category exclusion finder</a></li>
+								<li class="sidebar-link mw-list-item"><a href="category_mutual_exclusion.html" class="sidebar-item">Category mutual exclusion finder</a></li>
 							</ul>
 						</div>`

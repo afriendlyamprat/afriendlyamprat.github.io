@@ -1,5 +1,9 @@
 // Common page display
 
+function arrayUnion(arr1, arr2) {
+  return Array.from(new Set([...arr1, ...arr2]));
+}
+
 async function findOverlap() {
 	let categoryA = document.getElementById("categoryA").value.trim()
 	let categoryB = document.getElementById("categoryB").value.trim()
@@ -37,13 +41,159 @@ async function findOverlap() {
 	//console.log(categoryA)
 	//console.log(categoryB)
 	
-	let overlap = categoryA.filter(value => categoryB.includes(value));
+	let categoryC = categoryA.filter(value => categoryB.includes(value)).sort();
 	
-	if (overlap.length == 0) {		
+	if (categoryC.length == 0) {		
 		document.getElementById("articleSourceCode").innerHTML = `There are no articles in both Category:${categoryAName} and Category:${categoryBName}.<br><br>=== Details: ===<br>${categoryA.length} total articles in Category:${categoryAName}<br>${categoryB.length} total articles in Category:${categoryBName}`
 	}
 	else {
-		document.getElementById("articleSourceCode").innerHTML = `${overlap.length} articles were found that are in both Category:${categoryAName} and Category:${categoryBName}!<br><br>=== Details: ===<br>${categoryA.length} total articles in Category:${categoryAName}<br>${categoryB.length} total articles in Category:${categoryBName}<br><br>=== Found articles: ===<br>${overlap.join("<br>")}`		
+		document.getElementById("articleSourceCode").innerHTML = `${categoryC.length} articles were found that are in both Category:${categoryAName} and Category:${categoryBName}!<br><br>=== Details: ===<br>${categoryA.length} total articles in Category:${categoryAName}<br>${categoryB.length} total articles in Category:${categoryBName}<br><br>=== Found articles: ===<br>${categoryC.join("<br>")}`		
+	}
+	
+}
+
+async function findCombination() {
+	let categoryA = document.getElementById("categoryA").value.trim()
+	let categoryB = document.getElementById("categoryB").value.trim()
+	let categoryAName = categoryA
+	let categoryBName = categoryB
+	
+	// Error checking
+	if (categoryA == "") {
+		document.getElementById("articleSourceCode").innerHTML = "Error: Category A was not provided"
+		return
+	}
+	if (categoryB == "") {
+		document.getElementById("articleSourceCode").innerHTML = "Error: Category B was not provided"
+		return
+	}
+	
+	document.getElementById("articleSourceCode").innerHTML = "Fetching category contents from Pikmin Fanon! (This may take a while with longer categories)"
+	
+	await fetchCategory(categoryA).then(function(result){
+		categoryA = result
+	})
+	if (categoryA.length == 0) {
+		document.getElementById("articleSourceCode").innerHTML = `Category:${categoryAName} was not found!`
+		return
+	}
+	await fetchCategory(categoryB).then(function(result){
+		categoryB = result
+	})
+	if (categoryB.length == 0) {
+		document.getElementById("articleSourceCode").innerHTML = `Category:${categoryBName} was not found!`
+		return
+	}
+	
+	// Testing / debugging
+	//console.log(categoryA)
+	//console.log(categoryB)
+	
+	let categoryC = arrayUnion(categoryA,categoryB).sort();
+
+	if (categoryC.length == 0) {		
+		document.getElementById("articleSourceCode").innerHTML = `There are no articles in either Category:${categoryAName} or Category:${categoryBName}.<br><br>=== Details: ===<br>${categoryA.length} total articles in Category:${categoryAName}<br>${categoryB.length} total articles in Category:${categoryBName}`
+	}
+	else {
+		document.getElementById("articleSourceCode").innerHTML = `${categoryC.length} articles were found that are in either Category:${categoryAName} or Category:${categoryBName}!<br><br>=== Details: ===<br>${categoryA.length} total articles in Category:${categoryAName}<br>${categoryB.length} total articles in Category:${categoryBName}<br><br>=== Found articles: ===<br>${categoryC.join("<br>")}`		
+	}
+	
+}
+
+async function findExclusion() {
+	let categoryA = document.getElementById("categoryA").value.trim()
+	let categoryB = document.getElementById("categoryB").value.trim()
+	let categoryAName = categoryA
+	let categoryBName = categoryB
+	
+	// Error checking
+	if (categoryA == "") {
+		document.getElementById("articleSourceCode").innerHTML = "Error: Category A was not provided"
+		return
+	}
+	if (categoryB == "") {
+		document.getElementById("articleSourceCode").innerHTML = "Error: Category B was not provided"
+		return
+	}
+	
+	document.getElementById("articleSourceCode").innerHTML = "Fetching category contents from Pikmin Fanon! (This may take a while with longer categories)"
+	
+	await fetchCategory(categoryA).then(function(result){
+		categoryA = result
+	})
+	if (categoryA.length == 0) {
+		document.getElementById("articleSourceCode").innerHTML = `Category:${categoryAName} was not found!`
+		return
+	}
+	await fetchCategory(categoryB).then(function(result){
+		categoryB = result
+	})
+	if (categoryB.length == 0) {
+		document.getElementById("articleSourceCode").innerHTML = `Category:${categoryBName} was not found!`
+		return
+	}
+	
+	// Testing / debugging
+	//console.log(categoryA)
+	//console.log(categoryB)
+	
+	let categoryC = categoryA.filter(value => !categoryB.includes(value)).sort();
+	
+	if (categoryC.length == 0) {		
+		document.getElementById("articleSourceCode").innerHTML = `There are no articles in Category:${categoryAName} but not Category:${categoryBName}.<br><br>=== Details: ===<br>${categoryA.length} total articles in Category:${categoryAName}<br>${categoryB.length} total articles in Category:${categoryBName}`
+	}
+	else {
+		document.getElementById("articleSourceCode").innerHTML = `${categoryC.length} articles were found that are in Category:${categoryAName} but not Category:${categoryBName}!<br><br>=== Details: ===<br>${categoryA.length} total articles in Category:${categoryAName}<br>${categoryB.length} total articles in Category:${categoryBName}<br><br>=== Found articles: ===<br>${categoryC.join("<br>")}`		
+	}
+	
+}
+
+async function findMutualExclusion() {
+	let categoryA = document.getElementById("categoryA").value.trim()
+	let categoryB = document.getElementById("categoryB").value.trim()
+	let categoryAName = categoryA
+	let categoryBName = categoryB
+	
+	// Error checking
+	if (categoryA == "") {
+		document.getElementById("articleSourceCode").innerHTML = "Error: Category A was not provided"
+		return
+	}
+	if (categoryB == "") {
+		document.getElementById("articleSourceCode").innerHTML = "Error: Category B was not provided"
+		return
+	}
+	
+	document.getElementById("articleSourceCode").innerHTML = "Fetching category contents from Pikmin Fanon! (This may take a while with longer categories)"
+	
+	await fetchCategory(categoryA).then(function(result){
+		categoryA = result
+	})
+	if (categoryA.length == 0) {
+		document.getElementById("articleSourceCode").innerHTML = `Category:${categoryAName} was not found!`
+		return
+	}
+	await fetchCategory(categoryB).then(function(result){
+		categoryB = result
+	})
+	if (categoryB.length == 0) {
+		document.getElementById("articleSourceCode").innerHTML = `Category:${categoryBName} was not found!`
+		return
+	}
+	
+	// Testing / debugging
+	//console.log(categoryA)
+	//console.log(categoryB)
+	
+	let categoryD = categoryA.filter(value => !categoryB.includes(value));
+	let categoryE = categoryB.filter(value => !categoryA.includes(value));
+	let categoryC = arrayUnion(categoryD,categoryE).sort();
+	
+	if (categoryC.length == 0) {		
+		document.getElementById("articleSourceCode").innerHTML = `There are no articles in either Category:${categoryAName} or Category:${categoryBName} but not both.<br><br>=== Details: ===<br>${categoryA.length} total articles in Category:${categoryAName}<br>${categoryB.length} total articles in Category:${categoryBName}`
+	}
+	else {
+		document.getElementById("articleSourceCode").innerHTML = `${categoryC.length} articles were found that are in either Category:${categoryAName} or Category:${categoryBName} but not both!<br><br>=== Details: ===<br>${categoryA.length} total articles in Category:${categoryAName}<br>${categoryB.length} total articles in Category:${categoryBName}<br><br>=== Found articles: ===<br>${categoryC.join("<br>")}`		
 	}
 	
 }

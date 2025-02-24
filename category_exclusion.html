@@ -5,7 +5,7 @@
 		<link rel="stylesheet" href="stylesheets/pf.css">
 		<script type="text/javascript" src="page-display-setup.js" defer></script>
 		<script type="text/javascript" src="categories.js" defer></script>
-		<title>Category Overlap</title>
+		<title>Category Exclusion</title>
 	</head>
 	
 	<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-4 ns-subject mw-editable page-PikminFanon_About rootpage-PikminFanon_About skin-refreshed action-view skin--responsive">		
@@ -35,7 +35,7 @@
 									<main>
 						<article>
 							<header id="content-heading">
-								<h1 id="firstHeading" class="firstHeading"><span class="mw-page-title-namespace">Category Overlap Finder</span></h1>
+								<h1 id="firstHeading" class="firstHeading"><span class="mw-page-title-namespace">Category Exclusion Finder</span></h1>
 								<div class="mw-indicators">
 	</div>
 							</header>
@@ -45,18 +45,18 @@
 															<div id="content" role="article" class="ve-init-mw-desktopArticleTarget-targetContainer">
 		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><p>
 		
-		<p>This tool takes in the names of two Pikmin Fanon categories (without "Category:" prefix) and outputs a list of names of all pages that occur in either of the two categories.</p>	
+		<p>This tool takes in the names of two Pikmin Fanon categories (without "Category:" prefix) and outputs a list of names of all pages that occur in the first category but NOT the second category.</p>	
 
 		<h1>Parameters</h1>
 		<p><i>Category names to search. Hover over a parameter for more information.</i></p>
 		
-		<div class="paramLine" title='The name of the first category to search for overlap&#013;(do not use "Category:" prefix)'>Category A: <input type="text" id="categoryA" name="categoryA" size=30> </div>
+		<div class="paramLine" title='The name of the category to include in results&#013;(do not use "Category:" prefix)'>Category A (Include): <input type="text" id="categoryA" name="categoryA" size=30> </div>
 		
-		<div class="paramLine" title='The name of the second category to search for overlap&#013;(do not use "Category:" prefix)'>Category B: <input type="text" id="categoryB" name="categoryB" size=30> </div>
+		<div class="paramLine" title='The name of the category to exclude from results&#013;(do not use "Category:" prefix)'>Category B (Exclude): <input type="text" id="categoryB" name="categoryB" size=30> </div>
 
 		<h1>Template output</h1>
 		<div>
-			<button id="findOverlap" onclick="findOverlap()" type="button">Find category overlap</button>
+			<button id="findExclusion" onclick="findExclusion()" type="button">Find category exclusion</button>
 		</div>
 		<div>
 			<code id="articleSourceCode" class="articleSourceCode">
