@@ -4,7 +4,8 @@
 		<link rel="icon" type="image/x-icon" href="images/favicon.ico">
 		<link rel="stylesheet" href="stylesheets/pf.css">
 		<script type="text/javascript" src="page-display-setup.js" defer></script>
-		<title>Amprat's PF Tools</title>
+		<script type="text/javascript" src="categories.js" defer></script>
+		<title>Category Overlap</title>
 	</head>
 	
 	<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-4 ns-subject mw-editable page-PikminFanon_About rootpage-PikminFanon_About skin-refreshed action-view skin--responsive">		
@@ -16,7 +17,6 @@
 			</header>
 			<div id="sidebar-wrapper">
 				<div id="sidebar">
-					<!--<span style="color:red">Oops you shouldn't be seeing this (womp womp)</span>-->
 				</div>
 			</div>
 			<div id="content-footer-wrapper">
@@ -35,7 +35,7 @@
 									<main>
 						<article>
 							<header id="content-heading">
-								<h1 id="firstHeading" class="firstHeading"><span class="mw-page-title-namespace">Amprat's Pikmin Fanon Tools</span></h1>
+								<h1 id="firstHeading" class="firstHeading"><span class="mw-page-title-namespace">Family Article Template Generator</span></h1>
 								<div class="mw-indicators">
 	</div>
 							</header>
@@ -44,12 +44,29 @@
 														</div>
 															<div id="content" role="article" class="ve-init-mw-desktopArticleTarget-targetContainer">
 		<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr"><div class="mw-parser-output"><p>
-		Hello Pikmin Fanon Users! Amprat here!<br><br>
-		My <b>Pikmin Fanon Tools</b> are a group of browser scripts that allow users to <b><span style="color:#452">quickly create foundations for Pikmin Fanon pages</span></b> that follow the wiki's <a href="https://pikminfanon.com/wiki/PikminFanon:Policies_and_guidelines" title="PikminFanon:Policies and guidelines">policies and guidelines</a> as pertaining to specific article page guidelines.
-		The purpose of this project is to help users to create pages that follow proper article format, in order to make content that fits with the wiki's design, and make the staff team's job of cleaning up pages in this manner easier.<br><br>
-		If you have not done so yet, PLEASE familiarize yourself with the <a href="https://pikminfanon.com/wiki/PikminFanon:Policies_and_guidelines" title="PikminFanon:Policies and guidelines">policies and guidelines</a> of Pikmin Fanon, especially the pages that describe guidelines for types of <b>specific articles</b>! Reading these policies will help you to understand the purpose of these tools, which automate the process of specific article structure creation given a few parameters. The output each specific article type's template gives you should match the framework given for its respective article type.<br><br>
-		If you want to try out these tools, check out the links on the left sidebar! These lead to each tool I have created for this purpose.<br><br>
-		One last thing: If you have feedback or suggestions regarding these tools, please <a href="https://pikminfanon.com/wiki/User_talk:A_Friendly_Amprat" title="User talk:A Friendly Amprat">contact me via my talk page on Pikmin Fanon</a>! This is an experimental work-in-progress project, so your feedback is very helpful!
+		
+		<p>This tool takes in the names of two Pikmin Fanon categories (without "Category:" prefix) and outputs a list of names of all pages that occur in both categories.</p>	
+
+		<h1>Parameters</h1>
+		<p><i>Category names to search. Hover over a parameter for more information.</i></p>
+		
+		<div class="paramLine" title='The name of the first category to search for overlap&#013;(do not use "Category:" prefix)'>Category A: <input type="text" id="categoryA" name="categoryA" size=30> </div>
+		
+		<div class="paramLine" title='The name of the second category to search for overlap&#013;(do not use "Category:" prefix)'>Category B: <input type="text" id="categoryB" name="categoryB" size=30> </div>
+
+		<h1>Template output</h1>
+		<div>
+			<button id="findOverlap" onclick="findOverlap()" type="button">Find category overlap</button>
+		</div>
+		<div>
+			<code id="articleSourceCode" class="articleSourceCode">
+				
+			</code>
+		</div>
+		<!--<div style="margin-top:20px;margin-bottom:20px;position=absolute;">
+			<button id="copyTemplate" onclick="copyTemplate()" type="button">Copy category list to clipboard</button>&nbsp;&nbsp;&nbsp;<span style="color:green", id="doneText"> </span>
+		</div>-->
+		
 		</p></div></div>
 	</div>
 	</div>

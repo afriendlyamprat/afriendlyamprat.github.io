@@ -77,7 +77,7 @@ function updateParams(type) {
 			
 		parameters.enemyCategories = []
 		if (!parameters.isPlant) {
-			for (let i = 1; i <= 35; i++) {
+			for (let i = 1; i <= 36; i++) {
 				// Get checked categories
 				if (!document.getElementById("enemyCategories"+i).checked) continue
 				parameters.enemyCategories.push(document.getElementById("enemyCategories"+i).value)
@@ -179,6 +179,27 @@ function rewriteTemplate(type) {
 		document.getElementById("createArticleLink").href = `https://pikminfanon.com/w/index.php?action=edit&title=${parameters.pageName}&create=Create+an+article`
 		document.getElementById("createArticleLink").title = `https://pikminfanon.com/w/index.php?action=edit&title=${parameters.pageName}&create=Create+an+article`
 	}
+	
+	document.getElementById("copyTemplate").style.fontWeight = "bold"
+
+}
+
+let timeout = null;
+function copyTemplate() {
+	// Copy text from articleSourceCode
+	var copyText = document.getElementById("articleSourceCode").innerText;
+
+	// Copy the text inside the text field
+	navigator.clipboard.writeText(copyText);
+
+	// Alert the copied text
+	document.getElementById("copyTemplate").style.fontWeight = ""
+	document.getElementById("doneText").innerHTML = "<b>Copied to clipboard!</b>"
+	clearTimeout(timeout)
+	timeout = setTimeout(() => {
+	  document.getElementById("doneText").innerHTML = ""
+	}, "1000");
+
 }
 
 function getDisplayParam(paramName) {
@@ -330,6 +351,7 @@ function getEnemyArticleTemplate() {
 		if (parameters["enemyCategories"].includes("aura")) enemyCategoriesString += "[[Category:Aura enemies]]\n"
 		if (parameters["enemyCategories"].includes("bubble")) enemyCategoriesString += "[[Category:Bubble enemies]]\n"
 		if (parameters["enemyCategories"].includes("blunt force")) enemyCategoriesString += "[[Category:Blunt force enemies]]\n"
+		if (parameters["enemyCategories"].includes("dark")) enemyCategoriesString += "[[Category:Dark enemies]]\n"
 		if (parameters["enemyCategories"].includes("dark matter")) enemyCategoriesString += "[[Category:Dark matter enemies]]\n"
 		if (parameters["enemyCategories"].includes("darkfreeze")) enemyCategoriesString += "[[Category:Darkfreeze enemies]]\n"
 		if (parameters["enemyCategories"].includes("doom")) enemyCategoriesString += "[[Category:Doom enemies]]\n"
@@ -339,9 +361,9 @@ function getEnemyArticleTemplate() {
 		if (parameters["enemyCategories"].includes("fire")) enemyCategoriesString += "[[Category:Fire enemies]]\n"
 		if (parameters["enemyCategories"].includes("ice")) enemyCategoriesString += "[[Category:Ice enemies]]\n"
 		if (parameters["enemyCategories"].includes("lava")) enemyCategoriesString += "[[Category:Lava enemies]]\n"
+		if (parameters["enemyCategories"].includes("light")) enemyCategoriesString += "[[Category:Light enemies]]\n"
 		if (parameters["enemyCategories"].includes("lubricant")) enemyCategoriesString += "[[Category:Lubricant enemies]]\n"
 		if (parameters["enemyCategories"].includes("poison")) enemyCategoriesString += "[[Category:Poison enemies]]\n"
-		if (parameters["enemyCategories"].includes("shadow")) enemyCategoriesString += "[[Category:Shadow enemies]]\n"
 		if (parameters["enemyCategories"].includes("water")) enemyCategoriesString += "[[Category:Water enemies]]\n"
 		if (parameters["enemyCategories"].includes("airborne")) enemyCategoriesString += "[[Category:Airborne enemies]]\n"
 		if (parameters["enemyCategories"].includes("aquatic")) enemyCategoriesString += "[[Category:Aquatic enemies]]\n"
@@ -914,11 +936,14 @@ function getOopsMessage() {
 		"Pretend that didn't happen",
 		"NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
 		"I JUST HAAAD TO OPEN MY MOUTH. I JUST HAAAD TO SAY IT.",
-		"H*ck."
+		"H*ck.",
+		"That's it, this tool is getting added to my grievances page.",
+		"So to make a summary, these errors get a deserved Womp Womp.",
+		"\"Bruh\" - Grimacing Cremblub, probably"
 	]
 	if (oopsIndex == null) oopsIndex = Math.floor(Math.random() * msgs.length)
 	return msgs[oopsIndex]
 	
 }
 
-document.getElementById("rewriteTemplate").click()
+if (document.getElementById("rewriteTemplate")) document.getElementById("rewriteTemplate").click()
